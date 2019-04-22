@@ -1,0 +1,1 @@
+INSERT INTO books(id,title,author) VALUES(NULL, 'title', 'author'),(NULL, 'Harry Potter i Komnata Tajemnic', 'J.K. Rowling');
