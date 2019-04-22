@@ -5,21 +5,21 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface BookJPAEntityRepository extends JpaRepository<BookEntity, Integer>, BookDataEntityRepository {
+public interface BookJPAEntityRepository<T> extends JpaRepository<BookEntity, Integer>, EntityDataRepository<BookEntity> {
 
     @Override
-    default public BookEntity getBookEntity(int id) {
+    default public BookEntity getEntity(int id) {
         return getOne(id);
     }
 
     @Override
-    default public List<BookEntity> findBookEntities() {
+    default public List<BookEntity> findEntities() {
         return findAll();
 
     }
 
     @Override
-    default BookEntity saveBook(BookEntity bookEntity) {
+    default BookEntity saveEntity(BookEntity bookEntity) {
        return save(bookEntity);
     }
 }

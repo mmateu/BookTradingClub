@@ -1,7 +1,7 @@
 package com.example.BookTradingClub.service;
 
 import com.example.BookTradingClub.data.entity.BookEntity;
-import com.example.BookTradingClub.data.repository.BookDataEntityRepository;
+import com.example.BookTradingClub.data.repository.EntityDataRepository;
 import com.example.BookTradingClub.service.domain.Book;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -16,7 +16,7 @@ import java.util.List;
 public class BookServiceImpl implements BookService{
 
     @Autowired
-    private BookDataEntityRepository bookDataEntityRepository;
+    private EntityDataRepository<BookEntity> bookDataEntityRepository;
 
     @Autowired
     private ModelMapper mapper;
@@ -25,7 +25,7 @@ public class BookServiceImpl implements BookService{
     @Override
     public Book book(int id) {
 
-        BookEntity bookEntity = bookDataEntityRepository.getBookEntity(id);
+        BookEntity bookEntity = bookDataEntityRepository.getEntity(id);
 
         return mapper.map(bookEntity, Book.class);
     }
@@ -33,7 +33,7 @@ public class BookServiceImpl implements BookService{
     @Override
     public List<Book> books() {
 
-        List<BookEntity> entities = bookDataEntityRepository.findBookEntities();
+        List<BookEntity> entities = bookDataEntityRepository.findEntities();
 
         Type bookListType = new TypeToken<List<Book>>(){}.getType();
 
@@ -46,7 +46,7 @@ public class BookServiceImpl implements BookService{
 
         BookEntity bookEntity = mapper.map(book, BookEntity.class);
 
-        bookEntity = bookDataEntityRepository.saveBook(bookEntity);
+        bookEntity = bookDataEntityRepository.saveEntity(bookEntity);
 
         return mapper.map(bookEntity, Book.class);
 
