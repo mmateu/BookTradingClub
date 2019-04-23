@@ -1,6 +1,7 @@
 package com.example.BookTradingClub.data.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 @Entity
@@ -10,7 +11,6 @@ public class BookEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 
     @Column(nullable = false, name = "title")
@@ -44,5 +44,20 @@ public class BookEntity {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BookEntity)) return false;
+        BookEntity that = (BookEntity) o;
+        return id == that.id &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(author, that.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, author);
     }
 }
