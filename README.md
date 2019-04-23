@@ -1,0 +1,1 @@
+Spring Boot Application to manage Book Trading Club as in *https://chrome-delivery.glitch.me/trades*
