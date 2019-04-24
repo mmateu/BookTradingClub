@@ -1,6 +1,6 @@
 package com.example.BookTradingClub.presentation.controller;
 
-import com.example.BookTradingClub.presentation.model.UserBookModel;
+import com.example.BookTradingClub.presentation.dto.UserBookDto;
 import com.example.BookTradingClub.service.BookService;
 import com.example.BookTradingClub.service.domain.UserBook;
 import org.modelmapper.ModelMapper;
@@ -26,10 +26,10 @@ public class UserBooksController {
     ModelMapper mapper;
 
     @RequestMapping(method = RequestMethod.GET)
-    List<UserBookModel> getExistingUserBooks(){
+    List<UserBookDto> getExistingUserBooks(){
         List<UserBook> books = bookService.usersBooks();
 
-        Type userBookModelListType = new TypeToken<List<UserBookModel>>(){}.getType();
+        Type userBookModelListType = new TypeToken<List<UserBookDto>>(){}.getType();
 
         return mapper.map(books, userBookModelListType);
 

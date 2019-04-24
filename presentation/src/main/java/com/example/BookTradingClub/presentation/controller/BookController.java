@@ -1,6 +1,6 @@
 package com.example.BookTradingClub.presentation.controller;
 
-import com.example.BookTradingClub.presentation.model.BookModel;
+import com.example.BookTradingClub.presentation.dto.BookDto;
 import com.example.BookTradingClub.service.BookService;
 import com.example.BookTradingClub.service.domain.Book;
 import org.modelmapper.ModelMapper;
@@ -26,29 +26,29 @@ public class BookController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    List<BookModel> getBooks(){
+    List<BookDto> getBooks(){
 
         List<Book> books = bookService.books();
 
-        Type bookModelListType = new TypeToken<List<BookModel>>(){}.getType();
+        Type bookModelListType = new TypeToken<List<BookDto>>(){}.getType();
 
         return mapper.map(books, bookModelListType);
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    BookModel getBook(@PathVariable(value = "id") final String id ){
+    BookDto getBook(@PathVariable(value = "id") final String id ){
 
         Book book = bookService.book(Integer.parseInt(id));
 
-        return mapper.map(book,BookModel.class);
+        return mapper.map(book, BookDto.class);
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    BookModel saveBook(@RequestBody BookModel bookModel){
+    BookDto saveBook(@RequestBody BookDto bookDto){
 
-        Book book = mapper.map(bookModel, Book.class);
+        Book book = mapper.map(bookDto, Book.class);
 
-        return  mapper.map(bookService.saveBook(book), BookModel.class);
+        return  mapper.map(bookService.saveBook(book), BookDto.class);
 
     }
 }
