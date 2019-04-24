@@ -4,6 +4,7 @@ import com.example.BookTradingClub.data.entity.UserEntity;
 import com.example.BookTradingClub.data.repository.UserJPAEntityRepository;
 import com.example.BookTradingClub.service.domain.User;
 import com.example.BookTradingClub.service.exception.InvalidUsernameException;
+import com.example.BookTradingClub.service.exception.UserNotFoundException;
 import com.example.BookTradingClub.service.exception.UsernameAlreadyExistsException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,19 @@ public class UserCommandServiceImpl implements UserCommandService{
 
     @Override
     public void updateUser(User user) {
+
+    }
+
+    @Override
+    public User findUserByName(String name) {
+
+        UserEntity userEntity = userRepository.findByName(name);
+
+        if( userEntity == null ) {
+            throw new UserNotFoundException("User with name "+name+" was not found");
+        }
+
+        return mapper.map(userEntity, User.class);
 
     }
 }
