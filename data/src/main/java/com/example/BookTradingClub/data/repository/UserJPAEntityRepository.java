@@ -22,4 +22,6 @@ public interface UserJPAEntityRepository extends JpaRepository<UserEntity, Integ
     default UserEntity saveEntity(UserEntity userEntity) {
         return save(userEntity);
     }
+
+    UserEntity findByName(String name);
 }
