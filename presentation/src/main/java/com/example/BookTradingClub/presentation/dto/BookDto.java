@@ -6,7 +6,6 @@ import java.util.Objects;
  * Class representing a Book in presentation layer.
  */
 public class BookDto {
-    private int id;
 
     private String author;
 
@@ -15,13 +14,6 @@ public class BookDto {
     public BookDto() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getAuthor() {
         return author;
@@ -44,13 +36,12 @@ public class BookDto {
         if (this == o) return true;
         if (!(o instanceof BookDto)) return false;
         BookDto bookDto = (BookDto) o;
-        return id == bookDto.id &&
-                author.equals(bookDto.author) &&
-                title.equals(bookDto.title);
+        return Objects.equals(author, bookDto.author) &&
+                Objects.equals(title, bookDto.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, author, title);
+        return Objects.hash(author, title);
     }
 }

@@ -4,8 +4,6 @@ import java.util.Objects;
 
 public class UserDto {
 
-    private int id;
-
     private String name;
 
     private String firstName;
@@ -17,14 +15,6 @@ public class UserDto {
     private String country;
 
     public UserDto() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -71,17 +61,16 @@ public class UserDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UserDto)) return false;
-        UserDto user = (UserDto) o;
-        return id == user.id &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName) &&
-                Objects.equals(city, user.city) &&
-                Objects.equals(country, user.country);
+        UserDto userDto = (UserDto) o;
+        return Objects.equals(name, userDto.name) &&
+                Objects.equals(firstName, userDto.firstName) &&
+                Objects.equals(lastName, userDto.lastName) &&
+                Objects.equals(city, userDto.city) &&
+                Objects.equals(country, userDto.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, firstName, lastName, city, country);
+        return Objects.hash(name, firstName, lastName, city, country);
     }
 }

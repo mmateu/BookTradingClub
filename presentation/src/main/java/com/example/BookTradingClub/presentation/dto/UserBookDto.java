@@ -4,8 +4,6 @@ import java.util.Objects;
 
 public class UserBookDto {
 
-    private int id;
-
     private UserDto user;
 
     private BookDto book;
@@ -15,13 +13,6 @@ public class UserBookDto {
     public UserBookDto() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public UserDto getUser() {
         return user;
@@ -52,14 +43,13 @@ public class UserBookDto {
         if (this == o) return true;
         if (!(o instanceof UserBookDto)) return false;
         UserBookDto that = (UserBookDto) o;
-        return id == that.id &&
-                count == that.count &&
+        return count == that.count &&
                 Objects.equals(user, that.user) &&
                 Objects.equals(book, that.book);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, book, count);
+        return Objects.hash(user, book, count);
     }
 }
