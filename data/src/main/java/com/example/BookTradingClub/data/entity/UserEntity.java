@@ -11,7 +11,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(name = "first_name")
@@ -24,6 +24,8 @@ public class UserEntity {
 
     private String country;
 
+    private String password;
+
     public UserEntity() {
     }
 
@@ -33,6 +35,14 @@ public class UserEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -85,11 +95,12 @@ public class UserEntity {
                 Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName) &&
                 Objects.equals(city, that.city) &&
-                Objects.equals(country, that.country);
+                Objects.equals(country, that.country) &&
+                Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, firstName, lastName, city, country);
+        return Objects.hash(id, name, firstName, lastName, city, country, password);
     }
 }

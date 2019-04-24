@@ -16,6 +16,8 @@ public class User {
 
     private String country;
 
+    private String password;
+
     public User() {
     }
 
@@ -25,6 +27,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
