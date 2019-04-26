@@ -5,7 +5,10 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name = "books")
+@Table(
+        name = "books",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"title", "author"})
+)
 public class BookEntity {
 
 
