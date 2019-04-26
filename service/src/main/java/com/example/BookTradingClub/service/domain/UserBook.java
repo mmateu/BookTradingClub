@@ -62,4 +62,14 @@ public class UserBook {
     public int hashCode() {
         return Objects.hash(id, user, book, count);
     }
+
+    @Override
+    public String toString() {
+        return "UserBook{" +
+                "id=" + id +
+                ", user=" + user +
+                ", book=" + book +
+                ", count=" + count +
+                '}';
+    }
 }

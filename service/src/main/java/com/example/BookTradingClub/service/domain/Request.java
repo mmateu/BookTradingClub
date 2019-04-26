@@ -84,4 +84,16 @@ public class Request {
     public int hashCode() {
         return Objects.hash(id, wantsToGive, wantsToTake);
     }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "id=" + id +
+                ", wantsToGive=" + wantsToGive +
+                ", wantsToTake=" + wantsToTake +
+                ", accepted=" + accepted +
+                ", requestTimestamp=" + requestTimestamp +
+                ", acceptTimestamp=" + acceptTimestamp +
+                '}';
+    }
 }
