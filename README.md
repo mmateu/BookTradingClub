@@ -1,4 +1,4 @@
-Spring Boot Application to manage Book Trading Club as in *https://chrome-delivery.glitch.me/trades*  
+Spring Boot Application to manage Book Trading Club as in *https://chrome-delivery.glitch.me/trades*  (BACKEND FOR NOW)
 
 ## REQUIREMENTS
     1. JDK11
@@ -27,6 +27,15 @@ Resources:
     "author":"xxx"
 }
 ```
+{user}
+```json
+    {
+        "firstName":"xxx",
+        "lastName":"xxx",
+        "city":"xxx",
+        "country":"xxx"
+    }
+```
 
 
   
@@ -34,8 +43,9 @@ Using basic authentication:
 
 GET *localhost:8080/books* - get all(distinct) added books  
 GET *localhost:8080/books/{id}* - get {id} book  
-GET *localhost:8080/user/books* - get all users' books  
-POST *localhost:8080/books* - add {book} to a user    
+GET *localhost:8080/user-books - get all users' books
+POST *localhost:8080/books* - add {book} to a user     
+PATCH *localhost:8080/user/update* - update user  
 GET *localhost:8080/user/current* - get current user
 
 
