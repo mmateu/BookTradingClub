@@ -6,7 +6,7 @@ public interface UserCommandService {
 
     void registerNewUser(final String userName, final String password);
 
-    void updateUser(final User user);
+    User updateUser(final String username, final User user);
 
     User findUserByName(final String name);
 }

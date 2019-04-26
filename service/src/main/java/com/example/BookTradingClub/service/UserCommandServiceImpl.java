@@ -44,7 +44,28 @@ public class UserCommandServiceImpl implements UserCommandService{
     }
 
     @Override
-    public void updateUser(User user) {
+    public User updateUser(String username, User userPatch) {
+        User existingUser = this.findUserByName(username);
+        userPatch.setId(existingUser.getId());
+        userPatch.setName(username);
+
+
+        if(! existingUser.equals(userPatch)){
+            if( userPatch.getCity() != null && !userPatch.getCity().equals(existingUser.getCity())){
+                existingUser.setCity(userPatch.getCity());
+            }
+            if( userPatch.getCountry() != null && !userPatch.getCountry().equals(existingUser.getCountry())){
+                existingUser.setCountry(userPatch.getCountry());
+            }
+            if( userPatch.getFirstName() != null && !userPatch.getFirstName().equals(existingUser.getFirstName())){
+                existingUser.setFirstName(userPatch.getFirstName());
+            }
+            if( userPatch.getLastName() != null && !userPatch.getLastName().equals(existingUser.getLastName())){
+                existingUser.setLastName(userPatch.getLastName());
+            }
+        }
+        UserEntity updatedEntity =  userRepository.saveEntity(mapper.map(existingUser, UserEntity.class));
+        return mapper.map(updatedEntity, User.class);
 
     }
 
