@@ -2,14 +2,19 @@ package com.example.BookTradingClub.service;
 
 import com.example.BookTradingClub.data.entity.BookEntity;
 import com.example.BookTradingClub.data.entity.UserBookEntity;
-import com.example.BookTradingClub.data.repository.EntityDataRepository;
+import com.example.BookTradingClub.data.entity.UserEntity;
+import com.example.BookTradingClub.data.repository.BookJPAEntityRepository;
+import com.example.BookTradingClub.data.repository.UserBookJPAEntityRepository;
+import com.example.BookTradingClub.data.repository.UserJPAEntityRepository;
 import com.example.BookTradingClub.service.domain.Book;
+import com.example.BookTradingClub.service.domain.User;
 import com.example.BookTradingClub.service.domain.UserBook;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,10 +24,13 @@ import java.util.stream.Collectors;
 public class BookServiceImpl implements BookService{
 
     @Autowired
-    private EntityDataRepository<BookEntity> bookDataEntityRepository;
+    private BookJPAEntityRepository bookDataEntityRepository;
 
     @Autowired
-    EntityDataRepository<UserBookEntity> userBookDataEntityRepository;
+    private UserBookJPAEntityRepository userBookJPAEntityRepository;
+
+    @Autowired
+    private UserJPAEntityRepository userJPAEntityRepository;
 
     @Autowired
     private ModelMapper mapper;
@@ -47,21 +55,39 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Book saveBook(Book book) {
+    @Transactional
+    public UserBook saveBookForUser(Book book, User user) {
+
+        UserBook userBook = new UserBook();
+
+        BookEntity bookEntity = bookDataEntityRepository.findByTitleAndAuthor(book.getTitle(), book.getAuthor());
+        if( bookEntity == null) {
+            bookEntity = mapper.map(book, BookEntity.class);
+            bookEntity = bookDataEntityRepository.saveEntity(bookEntity);
+        }
+
+        UserEntity userEntity = userJPAEntityRepository.findByName(user.getName());
+        UserBookEntity userBookEntity = userBookJPAEntityRepository.findByBookAndUser(bookEntity, userEntity);
+        if( userBookEntity == null ) {
+            userBookEntity = new UserBookEntity();
+            userBookEntity.setCount(1);
+            userBookEntity.setBookEntity(bookEntity);
+            userBookEntity.setUserEntity(userEntity);
+        } else {
+            userBookEntity.setCount(userBookEntity.getCount()+1);
+        }
+
+        userBookEntity = userBookJPAEntityRepository.save(userBookEntity);
 
 
-        BookEntity bookEntity = mapper.map(book, BookEntity.class);
-
-        bookEntity = bookDataEntityRepository.saveEntity(bookEntity);
-
-        return mapper.map(bookEntity, Book.class);
+        return mapper.map(userBookEntity, UserBook.class);
 
     }
 
     @Override
     public List<UserBook> usersBooks() {
 
-        List<UserBookEntity> userBookEntities = userBookDataEntityRepository.findEntities()
+        List<UserBookEntity> userBookEntities = userBookJPAEntityRepository.findEntities()
                 .stream().filter(i -> i.getCount() > 0)
                 .collect(Collectors.toList());
 
