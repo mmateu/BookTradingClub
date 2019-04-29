@@ -1,10 +1,15 @@
 package com.example.BookTradingClub.presentation.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class UserBookDto {
 
-    private UserDto user;
+    private  int id;
+
+    private UserWithoutDetailsDto user;
 
     private BookDto book;
 
@@ -13,12 +18,24 @@ public class UserBookDto {
     public UserBookDto() {
     }
 
+    @JsonCreator
+    public UserBookDto(@JsonProperty("id") int id) {
+        this.id = id;
+    }
 
-    public UserDto getUser() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public UserWithoutDetailsDto getUser() {
         return user;
     }
 
-    public void setUser(UserDto user) {
+    public void setUser(UserWithoutDetailsDto user) {
         this.user = user;
     }
 
@@ -43,13 +60,14 @@ public class UserBookDto {
         if (this == o) return true;
         if (!(o instanceof UserBookDto)) return false;
         UserBookDto that = (UserBookDto) o;
-        return count == that.count &&
+        return id == that.id &&
+                count == that.count &&
                 Objects.equals(user, that.user) &&
                 Objects.equals(book, that.book);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user, book, count);
+        return Objects.hash(id, user, book, count);
     }
 }

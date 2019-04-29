@@ -7,6 +7,8 @@ import java.util.Objects;
  */
 public class BookDto {
 
+    private int id;
+
     private String author;
 
     private String title;
@@ -14,6 +16,13 @@ public class BookDto {
     public BookDto() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getAuthor() {
         return author;
