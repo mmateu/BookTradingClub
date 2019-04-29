@@ -7,19 +7,27 @@ public class Request {
 
     private int id;
 
-    private UserBook wantsToGive;
+    private UserBook offeredBook;
 
-    private UserBook wantsToTake;
+    private UserBook wantedBook;
 
-    private boolean accepted;
+    private ExchangeState exchangeState;
 
     private Timestamp requestTimestamp;
 
-    private Timestamp acceptTimestamp;
+    private Timestamp acceptDecisionTimestamp;
+
+    public Request(){
+    }
 
 
-
-    public Request() {
+    public Request(int id, UserBook offeredBook, UserBook wantedBook, ExchangeState exchangeState, Timestamp requestTimestamp, Timestamp acceptDecisionTimestamp) {
+        this.id = id;
+        this.offeredBook = offeredBook;
+        this.wantedBook = wantedBook;
+        this.exchangeState = exchangeState;
+        this.requestTimestamp = requestTimestamp;
+        this.acceptDecisionTimestamp = acceptDecisionTimestamp;
     }
 
     public int getId() {
@@ -30,28 +38,28 @@ public class Request {
         this.id = id;
     }
 
-    public UserBook getWantsToGive() {
-        return wantsToGive;
+    public UserBook getOfferedBook() {
+        return offeredBook;
     }
 
-    public void setWantsToGive(UserBook wantsToGive) {
-        this.wantsToGive = wantsToGive;
+    public void setOfferedBook(UserBook offeredBook) {
+        this.offeredBook = offeredBook;
     }
 
-    public UserBook getWantsToTake() {
-        return wantsToTake;
+    public UserBook getWantedBook() {
+        return wantedBook;
     }
 
-    public void setWantsToTake(UserBook wantsToTake) {
-        this.wantsToTake = wantsToTake;
+    public void setWantedBook(UserBook wantedBook) {
+        this.wantedBook = wantedBook;
     }
 
-    public boolean isAccepted() {
-        return accepted;
+    public ExchangeState getExchangeState() {
+        return exchangeState;
     }
 
-    public void setAccepted(boolean accepted) {
-        this.accepted = accepted;
+    public void setExchangeState(ExchangeState exchangeState) {
+        this.exchangeState = exchangeState;
     }
 
     public Timestamp getRequestTimestamp() {
@@ -62,12 +70,12 @@ public class Request {
         this.requestTimestamp = requestTimestamp;
     }
 
-    public Timestamp getAcceptTimestamp() {
-        return acceptTimestamp;
+    public Timestamp getAcceptDecisionTimestamp() {
+        return acceptDecisionTimestamp;
     }
 
-    public void setAcceptTimestamp(Timestamp acceptTimestamp) {
-        this.acceptTimestamp = acceptTimestamp;
+    public void setAcceptDecisionTimestamp(Timestamp acceptDecisionTimestamp) {
+        this.acceptDecisionTimestamp = acceptDecisionTimestamp;
     }
 
     @Override
@@ -76,24 +84,15 @@ public class Request {
         if (!(o instanceof Request)) return false;
         Request request = (Request) o;
         return id == request.id &&
-                Objects.equals(wantsToGive, request.wantsToGive) &&
-                Objects.equals(wantsToTake, request.wantsToTake);
+                Objects.equals(offeredBook, request.offeredBook) &&
+                Objects.equals(wantedBook, request.wantedBook) &&
+                exchangeState == request.exchangeState &&
+                Objects.equals(requestTimestamp, request.requestTimestamp) &&
+                Objects.equals(acceptDecisionTimestamp, request.acceptDecisionTimestamp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, wantsToGive, wantsToTake);
-    }
-
-    @Override
-    public String toString() {
-        return "Request{" +
-                "id=" + id +
-                ", wantsToGive=" + wantsToGive +
-                ", wantsToTake=" + wantsToTake +
-                ", accepted=" + accepted +
-                ", requestTimestamp=" + requestTimestamp +
-                ", acceptTimestamp=" + acceptTimestamp +
-                '}';
+        return Objects.hash(id, offeredBook, wantedBook, exchangeState, requestTimestamp, acceptDecisionTimestamp);
     }
 }

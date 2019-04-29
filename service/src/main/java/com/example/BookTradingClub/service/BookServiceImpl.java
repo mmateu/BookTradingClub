@@ -71,8 +71,8 @@ public class BookServiceImpl implements BookService{
         if( userBookEntity == null ) {
             userBookEntity = new UserBookEntity();
             userBookEntity.setCount(1);
-            userBookEntity.setBookEntity(bookEntity);
-            userBookEntity.setUserEntity(userEntity);
+            userBookEntity.setBook(bookEntity);
+            userBookEntity.setUser(userEntity);
         } else {
             userBookEntity.setCount(userBookEntity.getCount()+1);
         }

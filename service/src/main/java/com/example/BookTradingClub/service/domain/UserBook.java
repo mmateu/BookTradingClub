@@ -6,13 +6,20 @@ public class UserBook {
 
     private int id;
 
-    private User user;
+    private UserWithoutDetails user;
 
     private Book book;
 
     private int count;
 
     public UserBook() {
+    }
+
+    public UserBook(int id, UserWithoutDetails user, Book book, int count) {
+        this.id = id;
+        this.user = user;
+        this.book = book;
+        this.count = count;
     }
 
     public int getId() {
@@ -23,11 +30,11 @@ public class UserBook {
         this.id = id;
     }
 
-    public User getUser() {
+    public UserWithoutDetails getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserWithoutDetails user) {
         this.user = user;
     }
 
@@ -45,6 +52,18 @@ public class UserBook {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public boolean belongsToUserWithGivenUsername(String username) {
+        return this.user.getName().equals(username);
+    }
+
+    public boolean availableToExchange() {
+        return this.count > 0;
+    }
+
+    public void decrementCount(){
+        this.count = this.count -1;
     }
 
     @Override
