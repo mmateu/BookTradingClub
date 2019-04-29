@@ -1,24 +1,24 @@
 package com.example.BookTradingClub.data.repository;
 
-import com.example.BookTradingClub.data.entity.RequestEnity;
+import com.example.BookTradingClub.data.entity.RequestEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface RequestJPAEntityRepository extends JpaRepository<RequestEnity, Integer>, EntityDataRepository<RequestEnity> {
+public interface RequestJPAEntityRepository extends JpaRepository<RequestEntity, Integer>, EntityDataRepository<RequestEntity> {
 
     @Override
-    default RequestEnity getEntity(int id) {
+    default RequestEntity getEntity(int id) {
         return getOne(id);
     }
 
     @Override
-    default List<RequestEnity> findEntities() {
+    default List<RequestEntity> findEntities() {
         return findAll();
     }
 
     @Override
-    default RequestEnity saveEntity(RequestEnity requestEnity) {
-        return save(requestEnity);
+    default RequestEntity saveEntity(RequestEntity requestEntity) {
+        return save(requestEntity);
     }
 }
