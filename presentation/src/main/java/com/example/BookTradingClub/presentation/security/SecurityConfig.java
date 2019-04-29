@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/current*").authenticated()
                 .antMatchers("/user-books*").authenticated()
                 .antMatchers("/books*").authenticated()
+                .antMatchers("/exchanges*").authenticated()
                 .and()
                 .httpBasic().and()
                 .csrf().disable();
