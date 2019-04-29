@@ -36,6 +36,19 @@ Resources:
         "country":"xxx"
     }
 ```
+{decision} 
+```json
+{  
+    "id":999
+}
+```
+{exchange} 
+```json
+{  
+    "offeredBook":999,
+    "wantedBook":999
+}
+```
 
 
   
@@ -43,9 +56,19 @@ Using basic authentication:
 
 GET *localhost:8080/books* - get all(distinct) added books  
 GET *localhost:8080/books/{id}* - get {id} book  
-GET *localhost:8080/user-books - get all users' books
+GET *localhost:8080/user-books - get all users' books  
 POST *localhost:8080/books* - add {book} to a user     
-PATCH *localhost:8080/user/update* - update user  
-GET *localhost:8080/user/current* - get current user
+PATCH *localhost:8080/user/update* - update user with {user}  
+GET *localhost:8080/user/current* - get current user  
+POST *localhost:8080/exchanges* - post a trade request with {exchange}  
+GET *localhost:8080/exchanges/pending* - get list of pending requests  
+GET *localhost:8080/exchanges/accepted* - get list of accepted requests  
+GET *localhost:8080/exchanges/rejected* - get list of rejected requests  
+POST *localhost:8080/exchanges/accept* - acept a trade request with {decision}  
+POST *localhost:8080/exchanges/reject* - reject a trade request with {decision}   
+
+
+
+
 
 
