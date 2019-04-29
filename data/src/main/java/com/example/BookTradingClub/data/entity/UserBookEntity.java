@@ -13,11 +13,11 @@ public class UserBookEntity {
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity userEntity;
+    private UserEntity user;
 
     @OneToOne
     @JoinColumn(name = "book_id", nullable = false)
-    private BookEntity bookEntity;
+    private BookEntity book;
 
     private int count = 0;
 
@@ -32,20 +32,20 @@ public class UserBookEntity {
         this.id = id;
     }
 
-    public UserEntity getUserEntity() {
-        return userEntity;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
-    public BookEntity getBookEntity() {
-        return bookEntity;
+    public BookEntity getBook() {
+        return book;
     }
 
-    public void setBookEntity(BookEntity bookEntity) {
-        this.bookEntity = bookEntity;
+    public void setBook(BookEntity book) {
+        this.book = book;
     }
 
     public int getCount() {
@@ -63,12 +63,12 @@ public class UserBookEntity {
         UserBookEntity that = (UserBookEntity) o;
         return id == that.id &&
                 count == that.count &&
-                Objects.equals(userEntity, that.userEntity) &&
-                Objects.equals(bookEntity, that.bookEntity);
+                Objects.equals(user, that.user) &&
+                Objects.equals(book, that.book);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userEntity, bookEntity, count);
+        return Objects.hash(id, user, book, count);
     }
 }
